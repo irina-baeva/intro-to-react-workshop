@@ -22,6 +22,9 @@ starter/npm-debug.log*
 starter/yarn-debug.log*
 starter/yarn-error.log*
 
+starter/.env
+
+
 # dependencies
 final/node_modules
 final/.pnp
@@ -43,3 +46,5 @@ final/.env.production.local
 final/npm-debug.log*
 final/yarn-debug.log*
 final/yarn-error.log*
+
+final/.env
