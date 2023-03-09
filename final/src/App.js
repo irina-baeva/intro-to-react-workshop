@@ -1,10 +1,23 @@
 import { useState, useEffect } from 'react';
+import {
+  Stack,
+  Container,
+  Card,
+  Icon,
+  CardBody,
+  Text,
+  Heading,
+  Center,
+  Flex,
+} from '@chakra-ui/react';
+import { ImLocation } from 'react-icons/im';
+import './App.css';
 
 const App = () => {
   const [coordinates, setCoordinates] = useState({});
   const [airQualityIndex, setAirQualityIndex] = useState(null);
 
-  const LOCATION = 'bratislava';
+  const LOCATION = 'Bratislava';
 
   const GEO_DECODER_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${LOCATION}&limit=1&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
   const AIR_QUALITY_URL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
@@ -44,10 +57,26 @@ const App = () => {
   }, [coordinates.name]);
 
   return (
-    <div>
-      <div>City: {LOCATION}</div>
-      <div>Air Quality index level: {airQualityIndex} </div>
-    </div>
+    <Container>
+      <Center h={'100vh'}>
+        <Card maxW="sm" p={8}>
+          <CardBody>
+            <Stack mt="6" spacing="3">
+              <Flex justifyContent={'center'} alignItems={'center'}>
+                <Icon as={ImLocation} mr={1} />
+                <Heading size="md">{LOCATION}</Heading>
+              </Flex>
+              <Flex justifyContent={'center'} alignItems={'center'}>
+                <Text mr={2}>The Air Quality Index is </Text>
+                <Text fontSize="xl" color='blue.600'>
+                  {airQualityIndex}
+                </Text>
+              </Flex>
+            </Stack>
+          </CardBody>
+        </Card>
+      </Center>
+    </Container>
   );
 };
 
