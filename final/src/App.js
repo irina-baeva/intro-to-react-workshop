@@ -72,6 +72,21 @@ const App = () => {
   const handleClick = () => {
     setLocation(city);
   };
+
+  const QUALITATIVE_NAME = {
+    1: { name: 'good', color: 'green.700', emoji: '😊' },
+    2: { name: 'fair', color: 'teal.600', emoji: '😌' },
+    3: { name: 'moderate', color: 'orange.800', emoji: '😑' },
+    4: { name: 'poor', color: 'red.600', emoji: '😟' },
+    5: { name: 'very poor', color: 'red.900', emoji: '😨' },
+  };
+
+  const getQualitativeInfo = (aqi) => {
+    return QUALITATIVE_NAME[aqi];
+  };
+
+  const qualitativeInfo = getQualitativeInfo(airQualityIndex);
+
   return (
     <Container>
       <Center h={'100vh'}>
@@ -96,8 +111,21 @@ const App = () => {
               </Flex>
               <Flex justifyContent={'center'} alignItems={'center'}>
                 <Text mr={2}>The Air Quality Index is </Text>
+                <Text fontSize="xl" color={qualitativeInfo?.color}>
+                  {airQualityIndex || '...'}
+                </Text>
+              </Flex>
+              <Flex justifyContent={'center'} alignItems={'center'}>
+                <Text
+                  fontSize="xl"
+                  color={qualitativeInfo?.color}
+                  mr={1}
+                  fontWeight="bold"
+                >
+                  {qualitativeInfo?.name.toUpperCase() || ''}
+                </Text>
                 <Text fontSize="xl" color="blue.600">
-                  {airQualityIndex}
+                  {qualitativeInfo?.emoji || ''}
                 </Text>
               </Flex>
             </Stack>
