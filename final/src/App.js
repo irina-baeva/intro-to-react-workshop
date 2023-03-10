@@ -9,23 +9,27 @@ import {
   Heading,
   Center,
   Flex,
+  Input,
+  InputGroup,
+  Button,
+  InputRightElement,
 } from '@chakra-ui/react';
 import { ImLocation } from 'react-icons/im';
+
+import { getDecoderUrl, getAirQualityUrl } from './utils';
 import './App.css';
 
 const App = () => {
-  const [coordinates, setCoordinates] = useState({});
+  const [coordinates, setCoordinates] = useState(null);
   const [airQualityIndex, setAirQualityIndex] = useState(null);
+  const [city, setCity] = useState('');
+  const [location, setLocation] = useState(null);
 
-  const LOCATION = 'Bratislava';
-
-  const GEO_DECODER_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${LOCATION}&limit=1&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
-  const AIR_QUALITY_URL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
-
-  // 1 step: getting the coordinates
+  // 1: getting the coordinates
   const getCoordinatesByLocation = async () => {
     try {
-      const coordinatesData = await fetch(GEO_DECODER_URL);
+      const decoderUrl = getDecoderUrl(location);
+      const coordinatesData = await fetch(decoderUrl);
       const coordinatesDataJSON = await coordinatesData.json();
       const { lon, lat, name } = coordinatesDataJSON[0];
       setCoordinates({ lon, lat, name });
@@ -34,10 +38,11 @@ const App = () => {
     }
   };
 
-  // 2 step: getting the air quality data
+  // 2: getting the air quality data
   const getAirQualityDataByCoordinates = async () => {
     try {
-      const airQualityData = await fetch(AIR_QUALITY_URL);
+      const airQualityUrl = getAirQualityUrl(coordinates.lat, coordinates.lon);
+      const airQualityData = await fetch(airQualityUrl);
       const airQualityDataJSON = await airQualityData.json();
       const aqi = airQualityDataJSON.list[0].main.aqi;
       setAirQualityIndex(aqi);
@@ -47,28 +52,51 @@ const App = () => {
   };
 
   useEffect(() => {
-    getCoordinatesByLocation();
-  }, []);
+    if (location) {
+      getCoordinatesByLocation();
+    }
+  }, [location]);
 
   useEffect(() => {
-    if (coordinates.name) {
+    if (coordinates) {
       getAirQualityDataByCoordinates();
     }
-  }, [coordinates.name]);
+  }, [coordinates?.name]);
 
+  // 3: handle input change
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
+  };
+
+  // 4: handle button click
+  const handleClick = () => {
+    setLocation(city);
+  };
   return (
     <Container>
       <Center h={'100vh'}>
         <Card maxW="sm" p={8}>
           <CardBody>
-            <Stack mt="6" spacing="3">
+            <Stack mt="6" spacing="3" style={{ width: '300px' }}>
+              <InputGroup size="md">
+                <Input
+                  type={'text'}
+                  placeholder="Type the city"
+                  onChange={handleInputChange}
+                />
+                <InputRightElement width="4.5rem">
+                  <Button size="sm" onClick={handleClick}>
+                    {'Search'}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
               <Flex justifyContent={'center'} alignItems={'center'}>
                 <Icon as={ImLocation} mr={1} />
-                <Heading size="md">{LOCATION}</Heading>
+                <Heading size="md">{coordinates?.name}</Heading>
               </Flex>
               <Flex justifyContent={'center'} alignItems={'center'}>
                 <Text mr={2}>The Air Quality Index is </Text>
-                <Text fontSize="xl" color='blue.600'>
+                <Text fontSize="xl" color="blue.600">
                   {airQualityIndex}
                 </Text>
               </Flex>
