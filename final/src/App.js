@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { ImLocation } from 'react-icons/im';
 
-import { getDecoderUrl, getAirQualityUrl } from './utils';
+import { getDecoderUrl, getAirQualityUrl, getQualitativeInfo } from './utils';
 import './App.css';
 
 const App = () => {
@@ -72,6 +72,9 @@ const App = () => {
   const handleClick = () => {
     setLocation(city);
   };
+
+  const qualitativeInfo = getQualitativeInfo(airQualityIndex);
+
   return (
     <Container>
       <Center h={'100vh'}>
@@ -96,8 +99,21 @@ const App = () => {
               </Flex>
               <Flex justifyContent={'center'} alignItems={'center'}>
                 <Text mr={2}>The Air Quality Index is </Text>
+                <Text fontSize="xl" color={qualitativeInfo?.color}>
+                  {airQualityIndex || '...'}
+                </Text>
+              </Flex>
+              <Flex justifyContent={'center'} alignItems={'center'}>
+                <Text
+                  fontSize="xl"
+                  color={qualitativeInfo?.color}
+                  mr={1}
+                  fontWeight="bold"
+                >
+                  {qualitativeInfo?.name.toUpperCase() || ''}
+                </Text>
                 <Text fontSize="xl" color="blue.600">
-                  {airQualityIndex}
+                  {qualitativeInfo?.emoji || ''}
                 </Text>
               </Flex>
             </Stack>
