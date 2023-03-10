@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { ImLocation } from 'react-icons/im';
 
-import { getDecoderUrl, getAirQualityUrl } from './utils';
+import { getDecoderUrl, getAirQualityUrl, getQualitativeInfo } from './utils';
 import './App.css';
 
 const App = () => {
@@ -71,18 +71,6 @@ const App = () => {
   // 4: handle button click
   const handleClick = () => {
     setLocation(city);
-  };
-
-  const QUALITATIVE_NAME = {
-    1: { name: 'good', color: 'green.700', emoji: '😊' },
-    2: { name: 'fair', color: 'teal.600', emoji: '😌' },
-    3: { name: 'moderate', color: 'orange.800', emoji: '😑' },
-    4: { name: 'poor', color: 'red.600', emoji: '😟' },
-    5: { name: 'very poor', color: 'red.900', emoji: '😨' },
-  };
-
-  const getQualitativeInfo = (aqi) => {
-    return QUALITATIVE_NAME[aqi];
   };
 
   const qualitativeInfo = getQualitativeInfo(airQualityIndex);
