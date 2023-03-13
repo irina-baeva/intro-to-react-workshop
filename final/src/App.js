@@ -13,8 +13,11 @@ import {
   InputGroup,
   Button,
   InputRightElement,
+  useColorMode,
+  IconButton,
 } from '@chakra-ui/react';
-import { ImLocation } from 'react-icons/im';
+import { ImLocation, ImSun } from 'react-icons/im';
+import { FaMoon } from 'react-icons/fa';
 
 import { getDecoderUrl, getAirQualityUrl, getQualitativeInfo } from './utils';
 import './App.css';
@@ -24,6 +27,7 @@ const App = () => {
   const [airQualityIndex, setAirQualityIndex] = useState(null);
   const [city, setCity] = useState('');
   const [location, setLocation] = useState(null);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // 1: getting the coordinates
   const getCoordinatesByLocation = async () => {
@@ -77,6 +81,15 @@ const App = () => {
 
   return (
     <Container>
+      <Flex justifyContent={'right'} mt={2}>
+        <IconButton
+          onClick={toggleColorMode}
+          variant="outline"
+          colorScheme={colorMode === 'light' ? 'yellow' : 'pink'}
+          aria-label="Send email"
+          icon={colorMode === 'light' ? <FaMoon /> : <ImSun />}
+        />
+      </Flex>
       <Center h={'100vh'}>
         <Card maxW="sm" p={8}>
           <CardBody>
