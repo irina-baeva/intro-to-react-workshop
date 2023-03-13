@@ -45,6 +45,27 @@ Now the key can be accessed in any part of the project as `process.env.REACT_APP
 IMPORTANT: the `.env` file should not be committed that's why, it has been already added in `.gitignore` file.
 
 ---
+
+### Stories
+
+We will implement step by step following user stories: 
+
+> 1. As user I want to see the air quality for Bratislava.
+
+> 2. As user I want to type the name of the city in the input, click the "Show" button and the air quality index for the relevant city is displayed.
+
+> 3. As a user I want to see interpretation of the air quality index as good/fair/moderate/poor/very poor
+
+---
 ### Final
 
 `final` folder consists of the final version of the project. You can follow the same steps as above to run the code.
+
+The final result looks as follows:
+
+![image](final/public/images/final.png)
+
+---
+
+
+
