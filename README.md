@@ -67,5 +67,14 @@ The final result looks as follows:
 
 ---
 
+### Resources
 
+Main concepts of React.js:
+ - JSX: https://beta.reactjs.org/learn/writing-markup-with-jsx
+ - components: https://beta.reactjs.org/learn/your-first-component
+ - props: https://beta.reactjs.org/learn/passing-props-to-a-component
+ - hooks: https://reactjs.org/docs/hooks-overview.html
+
+ A re-introduction to JS:
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Overview
 
