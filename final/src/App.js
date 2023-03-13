@@ -87,7 +87,7 @@ const App = () => {
                   placeholder="Type the city"
                   onChange={handleInputChange}
                 />
-                <InputRightElement width="4.5rem">
+                <InputRightElement width="4.5rem" mr={1}>
                   <Button size="sm" onClick={handleClick}>
                     {'Search'}
                   </Button>
