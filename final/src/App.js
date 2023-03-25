@@ -16,8 +16,8 @@ import {
   useColorMode,
   IconButton,
 } from '@chakra-ui/react';
-import { ImLocation, ImSun } from 'react-icons/im';
-import { FaMoon } from 'react-icons/fa';
+import { ImLocation } from 'react-icons/im';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 import { getDecoderUrl, getAirQualityUrl, getQualitativeInfo } from './utils';
 import './App.css';
@@ -84,10 +84,9 @@ const App = () => {
       <Flex justifyContent={'right'} mt={2}>
         <IconButton
           onClick={toggleColorMode}
-          variant="outline"
-          colorScheme={colorMode === 'light' ? 'yellow' : 'pink'}
-          aria-label="Send email"
-          icon={colorMode === 'light' ? <FaMoon /> : <ImSun />}
+          rounded="full"
+          aria-label="toggle theme"
+          icon={colorMode === 'light' ? <FaSun /> : <FaMoon />}
         />
       </Flex>
       <Center h={'100vh'}>
