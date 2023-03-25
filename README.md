@@ -1,6 +1,8 @@
 ### Intro
 
-The purpose of the project is to provide an understanding of the basics of React.js. There are two folders:
+Here is the project for [Pyladies Bratislava meetup](https://www.meetup.com/pyladies-bratislava/events/292378857/). The purpose of the project is to provide an understanding of the basics of React.js. 
+
+There are two folders:
 - `final`
 - `starter`
 ---
